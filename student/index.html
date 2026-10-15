@@ -1,1 +1,26 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PassTrack | Student</title>
+  <link rel="stylesheet" href="../shared/common.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <strong>PassTrack</strong>
+    <button id="logout">Log out</button>
+  </header>
+  <main>
+    <h2 id="name"></h2>
+    <p id="info" class="muted"></p>
+    <section id="list"></section>
+    <section id="detail" hidden></section>
+  </main>
+  <script src="../shared/session.js"></script>
+  <script src="../shared/data.js"></script>
+  <script src="../shared/compute.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
