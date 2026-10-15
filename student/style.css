@@ -1,1 +1,17 @@
-
+.muted { color: #555; margin-top: 0; }
+.card {
+  display: block; width: 100%; text-align: left; background: #fff; border: 0;
+  border-radius: 10px; padding: 14px; margin-bottom: 12px; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08); font-size: 15px;
+}
+.card .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.card small { color: #555; }
+#detail { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+#detail table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+#detail th, #detail td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+#detail th { background: #e6ebf2; }
+#detail ul { padding-left: 20px; }
+.back {
+  background: #1f3a5f; color: #fff; border: 0; border-radius: 6px;
+  padding: 8px 12px; cursor: pointer; margin-bottom: 8px;
+}
