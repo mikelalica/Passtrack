@@ -1,1 +1,31 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PassTrack | Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <h1>PassTrack</h1>
+    <p class="sub">Academic Status and Deficiency Monitoring Portal</p>
+    <form id="loginForm">
+      <label for="role">Role</label>
+      <select id="role">
+        <option value="student">Student</option>
+        <option value="faculty">Faculty</option>
+        <option value="admin">Admin</option>
+      </select>
+      <label for="username">Username</label>
+      <input id="username" type="text" autocomplete="off">
+      <label for="password">Password</label>
+      <input id="password" type="password">
+      <p id="msg" class="msg" role="alert"></p>
+      <button type="submit">Sign in</button>
+    </form>
+  </main>
+  <script src="../shared/session.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
