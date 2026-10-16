@@ -6,11 +6,13 @@ const select = document.getElementById('subject');
 const meta = document.getElementById('meta');
 const box = document.getElementById('students');
 const msg = document.getElementById('msg');
+const fileInput = document.getElementById('file');
 
 const FIELDS = [
   ['quizzes', 'Quizzes'], ['activities', 'Activities'],
   ['exams', 'Exams'], ['attendance', 'Attendance']
 ];
+const COLS = ['Student ID', 'Quizzes', 'Activities', 'Exams', 'Attendance', 'Absences', 'Missing Requirements'];
 
 function esc(t) { return String(t).replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
 
@@ -79,7 +81,90 @@ box.addEventListener('input', (e) => {
   refresh(id);
 });
 
-select.addEventListener('change', render);
+select.addEventListener('change', () => { msg.textContent = ''; render(); });
+
+/* ---------- Excel template ---------- */
+document.getElementById('template').onclick = () => {
+  if (typeof XLSX === 'undefined') {
+    alert('The Excel library did not load. Please check your internet connection.');
+    return;
+  }
+  const sub = current();
+  const data = DATA.students.map(stu => {
+    const rec = DATA.records[stu.id][sub.code];
+    return {
+      'Student ID': stu.id,
+      'Quizzes': rec.scores.quizzes,
+      'Activities': rec.scores.activities,
+      'Exams': rec.scores.exams,
+      'Attendance': rec.scores.attendance,
+      'Absences': rec.absences,
+      'Missing Requirements': rec.missing.join(', ')
+    };
+  });
+  const ws = XLSX.utils.json_to_sheet(data, { header: COLS });
+  ws['!cols'] = [{ wch: 12 }, { wch: 10 }, { wch: 11 }, { wch: 8 }, { wch: 11 }, { wch: 10 }, { wch: 36 }];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Class Record');
+  XLSX.writeFile(wb, 'PassTrack_' + sub.code.replace(/\s+/g, '_') + '_Template.xlsx');
+};
+
+/* ---------- Excel upload ---------- */
+document.getElementById('upload').onclick = () => {
+  if (typeof XLSX === 'undefined') {
+    alert('The Excel library did not load. Please check your internet connection.');
+    return;
+  }
+  fileInput.click();
+};
+
+fileInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try {
+      const wb = XLSX.read(ev.target.result, { type: 'array' });
+      const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { defval: '' });
+      importRows(rows);
+    } catch (err) {
+      msg.textContent = 'Could not read the file. Please use the downloaded template.';
+    }
+    fileInput.value = '';
+  };
+  reader.readAsArrayBuffer(file);
+});
+
+function importRows(rows) {
+  const sub = current();
+  let updated = 0, skipped = 0, invalid = 0;
+  rows.forEach(raw => {
+    const r = {};
+    Object.keys(raw).forEach(k => { r[k.trim().toLowerCase()] = raw[k]; });
+    const id = String(r['student id'] || '').trim();
+    if (!DATA.records[id]) { skipped++; return; }
+    const rec = DATA.records[id][sub.code];
+    FIELDS.forEach(([k, label]) => {
+      const key = label.toLowerCase();
+      if (r[key] === undefined || r[key] === '') return;
+      const v = Number(r[key]);
+      if (isFinite(v) && v >= 0 && v <= 100) rec.scores[k] = v; else invalid++;
+    });
+    if (r['absences'] !== undefined && r['absences'] !== '') {
+      const a = Number(r['absences']);
+      if (isFinite(a) && a >= 0) rec.absences = a; else invalid++;
+    }
+    if (r['missing requirements'] !== undefined) {
+      rec.missing = String(r['missing requirements']).split(',').map(x => x.trim()).filter(Boolean);
+    }
+    updated++;
+  });
+  render();
+  msg.textContent = 'Imported ' + updated + ' student(s) for ' + sub.code +
+    (skipped ? ', skipped ' + skipped + ' unknown ID(s)' : '') +
+    (invalid ? ', ignored ' + invalid + ' invalid value(s)' : '') +
+    '. Press "Save changes" to keep them.';
+}
 
 document.getElementById('save').onclick = () => {
   Store.save();
