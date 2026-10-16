@@ -66,6 +66,10 @@ document.getElementById('export').onclick = () => {
     'Deficiencies': r.defs.join('; ')
   }));
   const ws = XLSX.utils.json_to_sheet(data);
+  ws['!cols'] = [
+    { wch: 12 }, { wch: 24 }, { wch: 12 }, { wch: 40 }, { wch: 22 },
+    { wch: 12 }, { wch: 10 }, { wch: 12 }, { wch: 10 }, { wch: 50 }
+  ];
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'PassTrack Report');
   XLSX.writeFile(wb, 'PassTrack_Report.xlsx');
