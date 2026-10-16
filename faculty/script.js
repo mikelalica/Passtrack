@@ -1,5 +1,10 @@
 const user = Session.require('faculty');
-document.getElementById('name').textContent = 'Welcome, ' + user.name;
+const fac = DATA.faculty.find(f => f.id === user.name);
+if (!fac) Session.logout();
+
+const mySubjects = DATA.subjects.filter(s => s.facultyId === fac.id);
+
+document.getElementById('name').textContent = 'Welcome, ' + fac.name;
 document.getElementById('logout').onclick = () => Session.logout();
 
 const select = document.getElementById('subject');
@@ -16,14 +21,14 @@ const COLS = ['Student ID', 'Quizzes', 'Activities', 'Exams', 'Attendance', 'Abs
 
 function esc(t) { return String(t).replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
 
-DATA.subjects.forEach(s => {
+mySubjects.forEach(s => {
   const o = document.createElement('option');
   o.value = s.code;
   o.textContent = s.code + ' - ' + s.name;
   select.appendChild(o);
 });
 
-function current() { return DATA.subjects.find(s => s.code === select.value); }
+function current() { return mySubjects.find(s => s.code === select.value); }
 
 function refresh(id) {
   const sub = current();
@@ -83,7 +88,7 @@ box.addEventListener('input', (e) => {
 
 select.addEventListener('change', () => { msg.textContent = ''; render(); });
 
-/* ---------- Excel template ---------- */
+/* ---------- Excel template (only the selected subject of this faculty) ---------- */
 document.getElementById('template').onclick = () => {
   if (typeof XLSX === 'undefined') {
     alert('The Excel library did not load. Please check your internet connection.');
@@ -109,7 +114,7 @@ document.getElementById('template').onclick = () => {
   XLSX.writeFile(wb, 'PassTrack_' + sub.code.replace(/\s+/g, '_') + '_Template.xlsx');
 };
 
-/* ---------- Excel upload ---------- */
+/* ---------- Excel upload (only for the selected subject of this faculty) ---------- */
 document.getElementById('upload').onclick = () => {
   if (typeof XLSX === 'undefined') {
     alert('The Excel library did not load. Please check your internet connection.');
