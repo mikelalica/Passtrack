@@ -1,1 +1,21 @@
-
+.muted { color: #555; margin-top: 4px; }
+main > label { display: block; margin: 12px 0 4px; font-weight: bold; }
+select, input {
+  width: 100%; padding: 10px; font-size: 16px;
+  border: 1px solid #bbb; border-radius: 6px; background: #fff;
+}
+.stu {
+  background: #fff; border-radius: 10px; padding: 14px; margin: 12px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.stu .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.stu small { color: #555; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+.stu label { display: block; font-size: 13px; font-weight: bold; }
+.stu label input { margin-top: 4px; font-weight: normal; }
+.actions { display: flex; gap: 10px; margin-top: 16px; }
+.primary, .secondary {
+  flex: 1; padding: 12px; font-size: 16px; border-radius: 6px; cursor: pointer;
+}
+.primary { background: #1f3a5f; color: #fff; border: 0; }
+.secondary { background: #fff; color: #1f3a5f; border: 1px solid #1f3a5f; }
