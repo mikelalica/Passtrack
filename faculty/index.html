@@ -17,6 +17,13 @@
     <label for="subject">Subject</label>
     <select id="subject"></select>
     <p id="meta" class="muted"></p>
+
+    <div class="tools">
+      <button id="template" class="secondary">Download template</button>
+      <button id="upload" class="secondary">Upload class record</button>
+      <input id="file" type="file" accept=".xlsx,.xls,.csv" hidden>
+    </div>
+
     <section id="students"></section>
     <div class="actions">
       <button id="save" class="primary">Save changes</button>
@@ -28,6 +35,7 @@
   <script src="../shared/data.js"></script>
   <script src="../shared/store.js"></script>
   <script src="../shared/compute.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
