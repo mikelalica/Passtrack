@@ -7,12 +7,22 @@ const pages = {
 document.getElementById('loginForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const role = document.getElementById('role').value;
-  const username = document.getElementById('username').value.trim();
+  const username = document.getElementById('username').value.trim().toLowerCase();
   const password = document.getElementById('password').value;
   const msg = document.getElementById('msg');
 
   if (!username || !password) {
     msg.textContent = 'Please enter your username and password.';
+    return;
+  }
+
+  let valid = false;
+  if (role === 'student') valid = DATA.students.some(s => s.id === username);
+  if (role === 'faculty') valid = DATA.faculty.some(f => f.id === username);
+  if (role === 'admin') valid = username === 'admin';
+
+  if (!valid) {
+    msg.textContent = 'Username not found for this role.';
     return;
   }
   Session.login(role, username);
