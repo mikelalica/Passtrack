@@ -8,6 +8,10 @@ document.getElementById('logout').onclick = () => Session.logout();
 const list = document.getElementById('list');
 const detail = document.getElementById('detail');
 
+function schedText(sub) {
+  return sub.schedule.map(s => s.time + ' (' + s.room + ')').join(' | ');
+}
+
 function renderList() {
   detail.hidden = true;
   list.hidden = false;
@@ -21,7 +25,8 @@ function renderList() {
     btn.innerHTML =
       '<div class="row"><strong>' + sub.code + ' - ' + sub.name + '</strong>' +
       '<span class="badge ' + st.key + '">' + st.icon + ' ' + st.label + '</span></div>' +
-      '<small>' + sub.instructor + ' | Standing: ' + p + '% | Est. grade: ' + Compute.grade(p) + '</small>';
+      '<small>' + sub.instructor + ' | Standing: ' + p + '% | Est. grade: ' + Compute.grade(p) + '</small><br>' +
+      '<small>' + schedText(sub) + '</small>';
     btn.onclick = () => renderDetail(sub, rec);
     list.appendChild(btn);
   });
@@ -39,6 +44,7 @@ function renderDetail(sub, rec) {
   detail.innerHTML =
     '<button class="back" id="back">Back</button>' +
     '<h3>' + sub.code + ' - ' + sub.name + '</h3>' +
+    '<p class="muted">' + sub.instructor + '<br>' + schedText(sub) + '</p>' +
     '<p><span class="badge ' + st.key + '">' + st.icon + ' ' + st.label + '</span></p>' +
     '<p>Estimated standing: <strong>' + p + '%</strong> | Est. grade: <strong>' + Compute.grade(p) + '</strong><br>' +
     '<small>This is an estimate for monitoring only, not the official grade.</small></p>' +
