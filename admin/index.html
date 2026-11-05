@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PassTrack | Manage</title>
+  <title>PassTrack | Admin</title>
   <link rel="stylesheet" href="../shared/common.css">
-  <link rel="stylesheet" href="manage.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="top">
@@ -13,27 +13,22 @@
     <button id="logout">Log out</button>
   </header>
   <main>
-    <a class="back" href="index.html">&larr; Back to dashboard</a>
-    <h2>Manage accounts and subjects</h2>
+    <h2 id="name"></h2>
+    <section id="summary" class="summary"></section>
 
-    <nav class="tabs" role="tablist">
-      <button class="tab" data-tab="students" role="tab">Students</button>
-      <button class="tab" data-tab="faculty" role="tab">Faculty</button>
-      <button class="tab" data-tab="subjects" role="tab">Subjects</button>
-    </nav>
+    <h3>Status per subject</h3>
+    <div class="scroll"><table id="subjects"></table></div>
 
-    <section class="panel">
-      <h3 id="formTitle"></h3>
-      <form id="form" autocomplete="off"></form>
-      <p id="msg" class="msg" role="status"></p>
-    </section>
+    <h3>Students needing attention</h3>
+    <section id="attention"></section>
 
-    <h3 id="listTitle"></h3>
-    <section id="list"></section>
+    <button id="export" class="primary">Export report to Excel</button>
   </main>
   <script src="../shared/session.js"></script>
   <script src="../shared/data.js"></script>
   <script src="../shared/store.js"></script>
-  <script src="manage.js"></script>
+  <script src="../shared/compute.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
