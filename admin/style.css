@@ -20,3 +20,7 @@ th { background: #e6ebf2; }
   width: 100%; margin: 16px 0 24px; padding: 12px; font-size: 16px;
   background: #1f3a5f; color: #fff; border: 0; border-radius: 6px; cursor: pointer;
 }
+.link {
+  display: block; text-align: center; margin: 0 0 14px; padding: 11px; font-size: 15px;
+  color: #1f3a5f; background: #fff; border: 1px solid #1f3a5f; border-radius: 6px; text-decoration: none;
+}
