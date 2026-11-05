@@ -1,22 +1,32 @@
-h3 { margin: 20px 0 8px; color: #1f3a5f; }
-.summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.box {
-  background: #fff; border-radius: 10px; padding: 14px; text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+h3 { margin: 18px 0 8px; color: #1f3a5f; }
+.back { display: inline-block; margin-bottom: 8px; color: #1f3a5f; font-size: 14px; }
+.tabs { display: flex; gap: 6px; margin: 10px 0 14px; }
+.tab {
+  flex: 1; padding: 10px; font-size: 15px; cursor: pointer;
+  background: #fff; color: #1f3a5f; border: 1px solid #1f3a5f; border-radius: 6px;
 }
-.box strong { display: block; font-size: 26px; color: #1f3a5f; }
-.box span { font-size: 13px; color: #555; }
-.scroll { overflow-x: auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-th, td { border-bottom: 1px solid #ddd; padding: 8px; text-align: left; }
-th { background: #e6ebf2; }
+.tab.active { background: #1f3a5f; color: #fff; }
+.panel { background: #fff; border-radius: 10px; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.panel h3 { margin-top: 0; }
+form label { display: block; margin-top: 10px; font-weight: bold; font-size: 14px; }
+form input, form select, form textarea {
+  width: 100%; margin-top: 4px; padding: 10px; font-size: 15px; font-family: inherit;
+  border: 1px solid #bbb; border-radius: 6px;
+}
+form textarea { min-height: 70px; resize: vertical; }
+.hint { display: block; margin-top: 3px; font-weight: normal; font-size: 12px; color: #555; }
+.btns { display: flex; gap: 8px; margin-top: 14px; }
+.btns button { flex: 1; padding: 11px; font-size: 15px; border-radius: 6px; cursor: pointer; }
+.btns .primary { background: #1f3a5f; color: #fff; border: 0; }
+.btns .secondary { background: #fff; color: #1f3a5f; border: 1px solid #1f3a5f; }
+.msg { min-height: 20px; margin: 10px 0 0; font-size: 14px; color: #1e7e34; }
+.msg.err { color: #b00020; }
 .item {
   background: #fff; border-radius: 10px; padding: 12px; margin-bottom: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,.08);
 }
-.item .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.item .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
 .item small { color: #555; display: block; margin-top: 4px; }
-.primary {
-  width: 100%; margin: 16px 0 24px; padding: 12px; font-size: 16px;
-  background: #1f3a5f; color: #fff; border: 0; border-radius: 6px; cursor: pointer;
-  }
+.item .acts { display: flex; gap: 6px; flex-shrink: 0; }
+.item .acts button { padding: 6px 10px; font-size: 13px; border-radius: 6px; cursor: pointer; background: #fff; color: #1f3a5f; border: 1px solid #1f3a5f; }
+.item .acts .del { color: #b00020; border-color: #b00020; }
