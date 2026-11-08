@@ -1,32 +1,30 @@
-h3 { margin: 18px 0 8px; color: #1f3a5f; }
-.back { display: inline-block; margin-bottom: 8px; color: #1f3a5f; font-size: 14px; }
-.tabs { display: flex; gap: 6px; margin: 10px 0 14px; }
-.tab {
-  flex: 1; padding: 10px; font-size: 15px; cursor: pointer;
-  background: #fff; color: #1f3a5f; border: 1px solid #1f3a5f; border-radius: 6px;
-}
-.tab.active { background: #1f3a5f; color: #fff; }
-.panel { background: #fff; border-radius: 10px; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+h3 { margin: 18px 0 8px; color: var(--navy); }
+.back { display: inline-block; margin-bottom: 8px; color: var(--navy); font-size: 14px; font-weight: 600; }
+.tabs { display: flex; gap: 8px; margin: 10px 0 14px; }
+.tab { flex: 1; padding: 11px; min-height: 44px; font-size: 15px; font-weight: 600; cursor: pointer; background: var(--card); color: var(--navy); border: 1px solid var(--navy); border-radius: 10px; }
+.tab.active { background: var(--navy); color: #fff; }
+.panel { background: var(--card); border-radius: var(--r); padding: 16px; box-shadow: var(--shadow); }
 .panel h3 { margin-top: 0; }
-form label { display: block; margin-top: 10px; font-weight: bold; font-size: 14px; }
-form input, form select, form textarea {
-  width: 100%; margin-top: 4px; padding: 10px; font-size: 15px; font-family: inherit;
-  border: 1px solid #bbb; border-radius: 6px;
-}
-form textarea { min-height: 70px; resize: vertical; }
-.hint { display: block; margin-top: 3px; font-weight: normal; font-size: 12px; color: #555; }
+form label { display: block; margin-top: 10px; font-weight: 600; font-size: 14px; }
+form input, form select, form textarea { width: 100%; margin-top: 4px; padding: 11px; font-size: 16px; font-family: inherit; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); }
+form textarea { min-height: 76px; resize: vertical; }
+.hint { display: block; margin-top: 3px; font-weight: normal; font-size: 12px; color: var(--muted); }
 .btns { display: flex; gap: 8px; margin-top: 14px; }
-.btns button { flex: 1; padding: 11px; font-size: 15px; border-radius: 6px; cursor: pointer; }
-.btns .primary { background: #1f3a5f; color: #fff; border: 0; }
-.btns .secondary { background: #fff; color: #1f3a5f; border: 1px solid #1f3a5f; }
+.btns button { flex: 1; padding: 12px; min-height: 46px; font-size: 15px; font-weight: 600; border-radius: 10px; cursor: pointer; }
+.btns .primary { background: var(--navy); color: #fff; border: 0; }
+.btns .secondary { background: #fff; color: var(--navy); border: 1px solid var(--navy); }
 .msg { min-height: 20px; margin: 10px 0 0; font-size: 14px; color: #1e7e34; }
 .msg.err { color: #b00020; }
-.item {
-  background: #fff; border-radius: 10px; padding: 12px; margin-bottom: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.08);
-}
+.item { background: var(--card); border-radius: var(--r); padding: 12px 14px; margin-bottom: 10px; box-shadow: var(--shadow); }
 .item .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
-.item small { color: #555; display: block; margin-top: 4px; }
+.item small { color: var(--muted); display: block; margin-top: 4px; }
 .item .acts { display: flex; gap: 6px; flex-shrink: 0; }
-.item .acts button { padding: 6px 10px; font-size: 13px; border-radius: 6px; cursor: pointer; background: #fff; color: #1f3a5f; border: 1px solid #1f3a5f; }
+.item .acts button { padding: 8px 12px; min-height: 38px; font-size: 13px; font-weight: 600; border-radius: 8px; cursor: pointer; background: #fff; color: var(--navy); border: 1px solid var(--navy); }
 .item .acts .del { color: #b00020; border-color: #b00020; }
+@media (min-width: 900px) {
+  main { display: grid; grid-template-columns: 380px 1fr; grid-template-rows: auto auto auto auto 1fr; column-gap: 28px;
+    grid-template-areas: "back back" "title title" "tabs tabs" "panel ltitle" "panel list"; }
+  .back { grid-area: back; justify-self: start; } main > h2 { grid-area: title; } .tabs { grid-area: tabs; max-width: 380px; }
+  .panel { grid-area: panel; align-self: start; position: sticky; top: 84px; }
+  #listTitle { grid-area: ltitle; margin-top: 0; } #list { grid-area: list; }
+}
